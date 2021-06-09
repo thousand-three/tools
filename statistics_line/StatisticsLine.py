@@ -48,13 +48,16 @@ def FileCountLine(path):
 
 
 if __name__ == "__main__":
-    str_path = input("请输入：文件或文件夹的绝对路径，若为文件名则为当前目录下指定文件，若为空则为当前目录所有文件\n")
-    path = CombinPath(str_path)
-    if os.path.isfile(path):
-        count = FileCountLine(path)
-        print(count)
-    elif os.path.isdir(path):
-        count = DirsCountLine(path)
-        print(count)
-    else:
-        print("the path not exists")
+	if len(sys.argv) == 2:
+		str_path = sys.argv[1]
+	else:
+		str_path = input("请输入：文件或文件夹的绝对路径，若为文件名则为当前目录下指定文件，若为空则为当前目录所有文件\n")
+	path = CombinPath(str_path)
+	if os.path.isfile(path):
+		count = FileCountLine(path)
+		print(count)
+	elif os.path.isdir(path):
+		count = DirsCountLine(path)
+		print(count)
+	else:
+		print("the path not exists")
