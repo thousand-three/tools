@@ -12,30 +12,21 @@ import sys
 
 
 def CombinPath(str_path):
-    #判断不同的系统路径，windows系统为'\\'，Linux为'/'
-    if '\\' in str_path or '/' in str_path:
+    if os.path.isdir(str_path) or os.path.isfile(str_path):
         return str_path
     elif str_path == "":
         path = os.path.split(os.path.realpath(__file__))[0]
         return path
     else:
         path = os.path.split(os.path.realpath(__file__))[0]
-        if '\\' in path:
-            path = path + '\\' + str_path
-            return path
-        if '/' in path:
-            path = path + '/' + str_path
-            return path
+        return os.path.join(path,str_path)
 
 
 def DirsCountLine(path):
     count = 0
     for root, dirs, files in os.walk(path):
         for f in files:
-            if '\\' in root:
-                count = count + FileCountLine(root+'\\'+f)
-            if '/' in root:
-                count = count + FileCountLine(root+'/'+f)
+            count += FileCountLine(os.path.join(root,f))
     return count
 
 
@@ -48,16 +39,16 @@ def FileCountLine(path):
 
 
 if __name__ == "__main__":
-	if len(sys.argv) == 2:
-		str_path = sys.argv[1]
-	else:
-		str_path = input("请输入：文件或文件夹的绝对路径，若为文件名则为当前目录下指定文件，若为空则为当前目录所有文件\n")
-	path = CombinPath(str_path)
-	if os.path.isfile(path):
-		count = FileCountLine(path)
-		print(count)
-	elif os.path.isdir(path):
-		count = DirsCountLine(path)
-		print(count)
-	else:
-		print("the path not exists")
+    if len(sys.argv) == 2:
+	    str_path = sys.argv[1]
+    else:
+	    str_path = input("请输入：文件或文件夹的绝对路径，若为文件名则为当前目录下指定文件，若为空则为当前目录所有文件\n")
+    path = CombinPath(str_path)
+    if os.path.isfile(path):
+        count = FileCountLine(path)
+        print(count)
+    elif os.path.isdir(path):
+        count = DirsCountLine(path)
+        print(count)
+    else:
+        print("the path not exists")
