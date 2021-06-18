@@ -9,3 +9,6 @@ some tools in life
 	
 3、clear_file:
 	清空文件内容
+	
+4、accelerate_system_time（待完善）:
+	加速系统时间
