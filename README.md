@@ -12,3 +12,6 @@ some tools in life
 	
 4、accelerate_system_time（待完善）:
 	加速系统时间
+	
+5、upper_to_lower:
+	文件内大写字母转为小写
