@@ -10,7 +10,7 @@
 import sys
 import os
 
-def ClearFile(path):
+def ConvertFile(path):
     new_content = ""
     if os.stat(path).st_size != 0:
         with open(path, "r", encoding="utf-8") as file:
@@ -21,18 +21,18 @@ def ClearFile(path):
             file.write(new_content)
             
 
-def ClearDir(path):
+def ConvertDir(path):
     for root,dirs,files in os.walk(path):
         for f in files:
-            ClearFile(os.path.join(root,f))
+            ConvertFile(os.path.join(root,f))
 
 if __name__ == "__main__":
     if len(sys.argv) == 2:
         path = sys.argv[1]
         if os.path.isdir(path):
-            ClearDir(path)
+            ConvertDir(path)
         elif os.path.isfile(path):
-            ClearFile(path)
+            ConvertFile(path)
         else:
             print("parameter is incorrect")
     else:
